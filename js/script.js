@@ -130,6 +130,8 @@ paymentMethod.addEventListener('change', (e) => {
 
 })
 
+shit
+
 
 
 
