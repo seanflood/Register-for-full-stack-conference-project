@@ -107,7 +107,7 @@ activitiesField.addEventListener('change', (e) => {
 
 
 
-    
+
 
 
 paymentMethod.addEventListener('change', (e) => {
@@ -129,13 +129,6 @@ paymentMethod.addEventListener('change', (e) => {
         }
 
 })
-
-
-
-
-
-
-
 
 
 
