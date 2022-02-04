@@ -17,11 +17,16 @@ const emailField = document.getElementById('email')
 const cardNumberField = document.getElementById('cc-num'); 
 const zipCodeField = document.getElementById('zip')
 const cvvField = document.getElementById('cvv')
-
 const form = document.querySelector('form')
-
 const checkboxes = document.querySelectorAll('.activities input');
 
+
+//RegEx Variables 
+const nameRegEx = /^[A-Za-z]+$/ 
+const emailRegEx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+const cardRegEx = /^[0-9]{13,16}$/
+const zipRegEx = /^[0-9]{5}$/
+const cvvRegEx = /^[0-9]{3}$/
 
 
 
@@ -151,33 +156,7 @@ paymentMethod.addEventListener('change', (e) => {
 //FORM VALIDATION
 
 
-// function nameFieldTest(event){
-//     const nameValue = nameField.value;
-//     const regExTest = /^[A-Za-z]+$/
-//     if (regExTest.test(nameValue)){
-//         console.log('Name test passed')
-
-//     }else{
-//         event.preventDefault();
-//         // console.log('holy shit turds')
-//         // alert('Must enter valid name')
-//     };  
-// }
-
-
-
-// function emailFieldTest(event){
-//     const emailValue = emailField.value;
-//     const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-//     if (emailRegExp.test(emailValue)){
-//         console.log('Email test passed')
-//     }else{
-//         event.preventDefault();
-//     };  
-// }
-
-
-
+// Tests whether a checkbox is checked or not. If not, form submission is prevented.
 function checkBoxFieldTest(event){
     for (let i = 0; i < checkboxes.length; i++){
         if(checkboxes[i].checked){
@@ -190,48 +169,11 @@ function checkBoxFieldTest(event){
 }
 
 
-// function creditCardTest(event){
-//     const creditCardRegEx = /^[0-9]{13,16}$/
-//     const credCardValue = cardNumberField.value
-//     const targ = event.target.value; 
-//         if (creditCardRegEx.test(credCardValue)){
-//             event.preventDefault()
-//             console.log("Credit-Card test passed")
-//         }else{
-//             event.preventDefault()
-//             console.log('FAIL')
-//         }
-    
-//  }
-
-//  function zipTest (event){
-//      const zipValue = zipCodeField.value
-//      const zipRegEx = /^[0-9]{5}$/ 
-//      if(zipRegEx.test(zipValue)){
-//         event.preventDefault()
-//         console.log("ZipCode test passed")
-//      }else{
-//         event.preventDefault()
-//         console.log("FAIL")
-//      }
-//  }
-
-// function cvvTest(event){
-//     const cvvValue = cvvField.value
-//     const cvvRegEx = /^[0-9]{3}$/ 
-//     if(cvvRegEx.test(cvvValue)){
-//        event.preventDefault()
-//        console.log("cvv test passed")
-//     }else{
-//        event.preventDefault()
-//        console.log("FAIL")
-//     }
-// }
-
-
-
-
-
+/** Function that accepts event, name, and regular expression to test inputs
+ * event = form event
+ * name = element selection from html
+ * reg = regular expression variable OR regular expression 
+ * **/
 function regExTester(event, name, reg){
     let value = name.value; 
     let regEx = reg
@@ -248,27 +190,25 @@ function regExTester(event, name, reg){
 
 
 
-
+//Form Submission event listener for testing input fields. 
 
 form.addEventListener('submit', (e) => {
     e.preventDefault(); 
-    //Test functions
-    //nameFieldTest(e);
-    //emailFieldTest(e);
+    
+    //Checkbox test
     checkBoxFieldTest(e);
-    //creditCardTest(e); 
-    //zipTest(e);
-    //cvvTest(e);
     //Name test
-    regExTester(e, nameField, /^[A-Za-z]+$/ )
+    regExTester(e, nameField, nameRegEx )
     //Email test
-    regExTester(e, emailField, /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
+    regExTester(e, emailField, emailRegEx)
+
+    
     //Credit Card Test
-    regExTester(e, cardNumberField, /^[0-9]{13,16}$/)
+    regExTester(e, cardNumberField, cardRegEx)
     //ZipCode Test
-    regExTester(e, zipCodeField, /^[0-9]{5}$/)
+    regExTester(e, zipCodeField, zipRegEx)
     //Cvv Test
-    regExTester(e, cvvField, /^[0-9]{3}$/)
+    regExTester(e, cvvField, cvvRegEx)
 
 })
 
@@ -285,13 +225,6 @@ form.addEventListener('submit', (e) => {
 
 
 
-
-
-
-
-
-
-//turn name regex into func
 //Fix Html spacing at the end
 
 
