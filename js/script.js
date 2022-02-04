@@ -293,3 +293,9 @@ form.addEventListener('submit', (e) => {
 
 //turn name regex into func
 //Fix Html spacing at the end
+
+
+
+
+
+shitshitshit
