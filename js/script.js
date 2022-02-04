@@ -4,7 +4,6 @@ const colorMenu = document.getElementById('color')
 const designMenu = document.getElementById('design')
 const childColor = colorMenu.children; 
 const activitiesTotal = document.getElementById('activities-cost'); 
-const activitiesField = document.getElementById('activities'); 
 
 const paymentMethod = document.getElementById('payment');
 const paymentChild = paymentMethod.children; 
@@ -12,6 +11,25 @@ const creditCardOpt = document.getElementById('credit-card');
 const paypalOpt = document.getElementById('paypal')
 const bitcoinOpt = document.getElementById('bitcoin')
 
+const activitiesField = document.getElementById('activities'); 
+const nameField = document.getElementById("name")
+const emailField = document.getElementById('email')
+const cardNumberField = document.getElementById('cc-num'); 
+const zipCodeField = document.getElementById('zip')
+const cvvField = document.getElementById('cvv')
+
+const form = document.querySelector('form')
+
+const checkboxes = document.querySelectorAll('.activities input');
+
+
+
+
+
+
+
+
+console.log(form)
 
 
 paypalOpt.style.display = 'none'
@@ -27,9 +45,7 @@ paymentChild[1].setAttribute('selected', '')
 
 
 window.onload = () => {
-    document.getElementById("name").focus(); 
-    //document.getElementById("payment").value = 'credit-card'
-
+    nameField.focus(); 
 
 }; 
 
@@ -130,7 +146,138 @@ paymentMethod.addEventListener('change', (e) => {
 
 })
 
-shit
+
+
+//FORM VALIDATION
+
+
+// function nameFieldTest(event){
+//     const nameValue = nameField.value;
+//     const regExTest = /^[A-Za-z]+$/
+//     if (regExTest.test(nameValue)){
+//         console.log('Name test passed')
+
+//     }else{
+//         event.preventDefault();
+//         // console.log('holy shit turds')
+//         // alert('Must enter valid name')
+//     };  
+// }
+
+
+
+// function emailFieldTest(event){
+//     const emailValue = emailField.value;
+//     const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+//     if (emailRegExp.test(emailValue)){
+//         console.log('Email test passed')
+//     }else{
+//         event.preventDefault();
+//     };  
+// }
+
+
+
+function checkBoxFieldTest(event){
+    for (let i = 0; i < checkboxes.length; i++){
+        if(checkboxes[i].checked){
+            event.preventDefault()
+            console.log('Checkbox test passed')
+        }else{
+            event.preventDefault()
+        }
+    }
+}
+
+
+// function creditCardTest(event){
+//     const creditCardRegEx = /^[0-9]{13,16}$/
+//     const credCardValue = cardNumberField.value
+//     const targ = event.target.value; 
+//         if (creditCardRegEx.test(credCardValue)){
+//             event.preventDefault()
+//             console.log("Credit-Card test passed")
+//         }else{
+//             event.preventDefault()
+//             console.log('FAIL')
+//         }
+    
+//  }
+
+//  function zipTest (event){
+//      const zipValue = zipCodeField.value
+//      const zipRegEx = /^[0-9]{5}$/ 
+//      if(zipRegEx.test(zipValue)){
+//         event.preventDefault()
+//         console.log("ZipCode test passed")
+//      }else{
+//         event.preventDefault()
+//         console.log("FAIL")
+//      }
+//  }
+
+// function cvvTest(event){
+//     const cvvValue = cvvField.value
+//     const cvvRegEx = /^[0-9]{3}$/ 
+//     if(cvvRegEx.test(cvvValue)){
+//        event.preventDefault()
+//        console.log("cvv test passed")
+//     }else{
+//        event.preventDefault()
+//        console.log("FAIL")
+//     }
+// }
+
+
+
+
+
+function regExTester(event, name, reg){
+    let value = name.value; 
+    let regEx = reg
+    if(regEx.test(value)){
+        event.preventDefault();
+        console.log('gucci')
+    }else{
+        event.preventDefault()
+    }
+}
+
+
+
+
+
+
+
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault(); 
+    //Test functions
+    //nameFieldTest(e);
+    //emailFieldTest(e);
+    checkBoxFieldTest(e);
+    //creditCardTest(e); 
+    //zipTest(e);
+    //cvvTest(e);
+    //Name test
+    regExTester(e, nameField, /^[A-Za-z]+$/ )
+    //Email test
+    regExTester(e, emailField, /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
+    //Credit Card Test
+    regExTester(e, cardNumberField, /^[0-9]{13,16}$/)
+    //ZipCode Test
+    regExTester(e, zipCodeField, /^[0-9]{5}$/)
+    //Cvv Test
+    regExTester(e, cvvField, /^[0-9]{3}$/)
+
+})
+
+
+
+
+
+//credit card selection for later
+//console.log(paymentChild[1]);
 
 
 
@@ -144,12 +291,5 @@ shit
 
 
 
-
-
-
-
-
-
-
-
-//Fix Html spacing at the end 
+//turn name regex into func
+//Fix Html spacing at the end
