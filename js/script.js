@@ -296,6 +296,3 @@ form.addEventListener('submit', (e) => {
 
 
 
-
-
-shitshitshit
