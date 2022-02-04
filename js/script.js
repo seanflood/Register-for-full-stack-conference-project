@@ -30,28 +30,14 @@ const cvvRegEx = /^[0-9]{3}$/
 
 
 
-
-
-
-
-console.log(form)
-
-
 paypalOpt.style.display = 'none'
 bitcoinOpt.style.display = 'none'
 
 paymentChild[1].setAttribute('selected', '')
 
 
- 
-
-
-
-
-
 window.onload = () => {
     nameField.focus(); 
-
 }; 
 
 //Hides "Other Job Role?" on page load
@@ -59,29 +45,17 @@ otherJob.style.display = 'none';
 
 
 
-
-
-
-
 // Event listener for "change" in "Job Role" select box.  Displays "Other Job Role?" input box when "Other" option is selected.
 jobList.addEventListener('change',  (e) => {
     let targ = e.target.value
-    // console.log(targ);
     for (let i = 0; i < jobList.length; i++){
         let other = jobList[i].value
-        // console.log(other);
-        
         if(targ === 'other'){
             otherJob.style.display = 'inline-block'; 
         }
     }
 })
 
-//console.log(designMenu);
- 
-
-//if 'js puns' is selected display correct color options 
-//if 'heart js' is selected else 
 
 //Hides "Color" menu on page load
 colorMenu.disabled = true; 
@@ -129,7 +103,7 @@ activitiesField.addEventListener('change', (e) => {
 
 
 
-
+//Detects Change on 'payment type'
 
 paymentMethod.addEventListener('change', (e) => {
     let targ = e.target.value;
@@ -202,7 +176,7 @@ form.addEventListener('submit', (e) => {
     //Email test
     regExTester(e, emailField, emailRegEx)
 
-    
+
     //Credit Card Test
     regExTester(e, cardNumberField, cardRegEx)
     //ZipCode Test
@@ -211,8 +185,6 @@ form.addEventListener('submit', (e) => {
     regExTester(e, cvvField, cvvRegEx)
 
 })
-
-
 
 
 
