@@ -133,17 +133,23 @@ paymentMethod.addEventListener('change', (e) => {
 
 // Tests whether a checkbox is checked or not. If not, form submission is prevented.
 function checkBoxFieldTest(event){
+    let isValid = false; 
     for (let i = 0; i < checkboxes.length; i++){
         if(checkboxes[i].checked){
-            event.preventDefault()
-            checkboxes[i].parentElement.classList.add('valid')
-            activitiesField.lastElementChild.style.display = 'none'
+            isValid = true; 
 
         }else{
             event.preventDefault()
-            activitiesField.lastElementChild.style.display = 'inline-block'
 
         }
+        if(isValid){
+            checkboxes[i].parentElement.classList.add('valid')
+            activitiesField.lastElementChild.style.display = 'none'
+        }else{
+                activitiesField.lastElementChild.style.display = 'inline-block'
+                checkboxes[i].parentElement.classList.add('not-valid')
+        }
+
     }
 }
 
