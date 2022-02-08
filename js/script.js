@@ -4,7 +4,7 @@ const colorMenu = document.getElementById('color')
 const designMenu = document.getElementById('design')
 const childColor = colorMenu.children; 
 const activitiesTotal = document.getElementById('activities-cost'); 
-
+const paymentValue = document.getElementById('payment').value
 const paymentMethod = document.getElementById('payment');
 const paymentChild = paymentMethod.children; 
 const creditCardOpt = document.getElementById('credit-card');
@@ -18,7 +18,9 @@ const cardNumberField = document.getElementById('cc-num');
 const zipCodeField = document.getElementById('zip')
 const cvvField = document.getElementById('cvv')
 const form = document.querySelector('form')
+
 const checkboxes = document.querySelectorAll('.activities input');
+
 
 
 //RegEx Variables 
@@ -107,7 +109,6 @@ activitiesField.addEventListener('change', (e) => {
 
 paymentMethod.addEventListener('change', (e) => {
     let targ = e.target.value;
-    console.log(targ);
 
         if (targ === 'paypal'){
             paypalOpt.style.display = 'block';
@@ -135,12 +136,19 @@ function checkBoxFieldTest(event){
     for (let i = 0; i < checkboxes.length; i++){
         if(checkboxes[i].checked){
             event.preventDefault()
-            console.log('Checkbox test passed')
+            checkboxes[i].parentElement.classList.add('valid')
+            activitiesField.lastElementChild.style.display = 'none'
+
         }else{
             event.preventDefault()
+            activitiesField.lastElementChild.style.display = 'inline-block'
+
         }
     }
 }
+
+
+
 
 
 /** Function that accepts event, name, and regular expression to test inputs
@@ -153,11 +161,20 @@ function regExTester(event, name, reg){
     let regEx = reg
     if(regEx.test(value)){
         event.preventDefault();
-        console.log('gucci')
+        console.log('gucci') 
+        name.parentElement.classList.add('valid')
+        name.parentElement.classList.remove('not-valid'); 
+        name.parentElement.lastElementChild.style.display = "none"
+
     }else{
         event.preventDefault()
+        name.parentElement.classList.add('not-valid')
+        name.parentElement.classList.remove('valid'); 
+        name.parentElement.lastElementChild.style.display = "inline-block"
     }
 }
+
+
 
 
 
@@ -167,8 +184,7 @@ function regExTester(event, name, reg){
 //Form Submission event listener for testing input fields. 
 
 form.addEventListener('submit', (e) => {
-    e.preventDefault(); 
-    
+    e.preventDefault();
     //Checkbox test
     checkBoxFieldTest(e);
     //Name test
@@ -176,21 +192,39 @@ form.addEventListener('submit', (e) => {
     //Email test
     regExTester(e, emailField, emailRegEx)
 
-
-    //Credit Card Test
-    regExTester(e, cardNumberField, cardRegEx)
-    //ZipCode Test
-    regExTester(e, zipCodeField, zipRegEx)
-    //Cvv Test
-    regExTester(e, cvvField, cvvRegEx)
+    //Only validate credit card fields if "credit-card" is selected
+    if (paymentMethod.value === 'credit-card'){
+        //Credit Card Test
+        regExTester(e, cardNumberField, cardRegEx)
+        //ZipCode Test
+        regExTester(e, zipCodeField, zipRegEx)
+        //Cvv Test
+        regExTester(e, cvvField, cvvRegEx)
+    }
 
 })
 
 
 
-//credit card selection for later
-//console.log(paymentChild[1]);
 
+
+
+
+//Accessibility :::use "checkboxes" variable:::
+
+for(let i = 0; i < checkboxes.length; i++){
+
+    checkboxes[i].addEventListener('focus', (e) =>{
+        checkboxes[i].parentElement.classList.add('focus');
+        checkboxes[i].parentElement.classList.remove('blur');  
+    })
+
+    checkboxes[i].addEventListener('blur', (e) => {
+        checkboxes[i].parentElement.classList.remove('focus'); 
+        checkboxes[i].parentElement.classList.add('blur')
+
+    })
+}
 
 
 
