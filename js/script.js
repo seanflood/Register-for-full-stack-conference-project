@@ -125,6 +125,7 @@ designMenu.addEventListener('change', (e) => {
         if(dataTheme === targ){
             child.hidden = false; 
             child.setAttribute('data-theme', dataTheme)
+            child.selected = true;
         }else{
             child.hidden = true;
         }
